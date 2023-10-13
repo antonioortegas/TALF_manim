@@ -1,11 +1,10 @@
 from manim import *
 
-class VennDiagram(Scene):
+class ToyExample(Scene):
     def construct(self):
-        # Create 5 circles
-        test = 1
+        self.camera.background_color = DARKER_GRAY
         
 #with tempconfig({"quality": "low_quality", "preview": True}):
 with tempconfig({"quality": "high_quality", "preview": True}):
-    scene = VennDiagram()
+    scene = ToyExample()
     scene.render()
