@@ -35,9 +35,9 @@ class Video(Scene):
         #Store everything in a VGroup so we can move it all together
         highlightedClosureTable = VGroup(closureTable, highlightedCells)
         
-        title = Text("Cierre de los Tipos de Lenguajes").scale(0.8)
+        title = Text("2.11 - Cierre de los Tipos de Lenguajes").scale(0.8)
         
-        slideTable = VGroup(title, highlightedClosureTable).arrange(DOWN, buff = 1)
+        slideTable = VGroup(title.copy(), highlightedClosureTable).arrange(DOWN, buff = 1)
         
         
         
@@ -74,14 +74,49 @@ class Video(Scene):
             radius=ring.radius*0.3,
             color=BLACK))
         
+        textEsCerrado = Tex(r"$A\: es \: cerrado\: para \: \bullet \Leftrightarrow \forall a,b \in A, \: a\bullet b \in A$") 
+        
+        # Generate random points inside the circle
+        def generateRandomPointInsideCircle(circle):
+            theta = np.random.uniform(0, 2 * np.pi)  # Generate a random angle in radians
+            radius = np.sqrt(np.random.uniform(0, 1)) * circle.radius*0.75  # Generate a random radius
+
+            x = radius * np.cos(theta) + circle.get_center()[0]
+            y = radius * np.sin(theta) + circle.get_center()[1]
+
+            return np.array([x, y, 0])
+            
+        naturalSet = Circle(radius=1.5, color=WHITE, fill_opacity=0.1, fill_color=WHITE)
+        naturalSet.shift(DOWN*1)
+        naturalSetLabel = Tex(r"$\mathbb{N}$", color=WHITE).next_to(naturalSet.get_top(), UP)
+        
+        randomPoints = VGroup()
+        for i in range(5):
+            randomPoints.add(Dot(generateRandomPointInsideCircle(naturalSet), color=WHITE))
+            
+        randomElements = VGroup()
+        for index, dot in enumerate(randomPoints):
+            randomElements.add(Tex(r"$"+str(index)+"$", color=WHITE).move_to(dot.get_center()).scale(0.75))
+        
+        naturalSetGroup = VGroup(naturalSet, naturalSetLabel, randomElements)
+        
+        
+        
+            
         
         
         
         
+        #self.play(Write(title), run_time=0.5)
+        #self.play(FadeOut(title, shift=UP), run_time=1.5)
+        #self.play(Write(textEsCerrado), run_time=1.0)
+        #self.play(textEsCerrado.animate.shift(UP*2.5), run_time=1.0)
+        self.play(DrawBorderThenFill(naturalSet), run_time=1.0)
+        self.play(Write(naturalSetLabel), run_time=0.5)
+        self.play(Write(randomElements), run_time=1.0)
+        self.play(naturalSetGroup.animate.shift(LEFT*3), run_time=1.0)
         
-        
-        
-        self.play(Write(title), run_time=0.5)
+        """
         self.play(closureTable.create(line_animation=Write,
                             label_animation=Write,
                             element_animation=Create),
@@ -103,6 +138,8 @@ class Video(Scene):
         self.play(Create(holes), run_time=1.0)
     
         self.wait(5)
+        """
+        self.wait(10)
         
 #with tempconfig({"quality": "low_quality", "preview": True}):
 with tempconfig({"quality": "high_quality", "preview": True}):

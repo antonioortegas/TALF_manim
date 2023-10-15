@@ -2,7 +2,7 @@
 
 ## 0. Introducción
 
-Apartado 2.11, Cierre de los Tipos de Lenguajes. Definidas en el apartado anterior algunas operaciones sobre lenguajes, cabe preguntarse acerca de los lenguajes que generan estas operaciones. En este apartado se estudia el cierre de los tipos de lenguajes para dichas operaciones.
+Apartado 2.11, Cierre de los Tipos de Lenguajes. Definidas en el apartado anterior algunas operaciones sobre lenguajes, cabe preguntarse de que tipo son los lenguajes que generan estas operaciones. En este apartado se estudia el cierre de los tipos de lenguajes para dichas operaciones.
 
 ## 1. ¿Qué significa que un lenguaje está cerrado para una operación?
 
