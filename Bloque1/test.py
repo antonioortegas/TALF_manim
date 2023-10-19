@@ -26,18 +26,10 @@ class Video(Scene):
         closureTable.get_vertical_lines().set_stroke(width=0.7)
         closureTable.get_horizontal_lines().set_stroke(width=0.7)
         closureTable.scale(0.30)
-        #Cells containing "No" are highlighted in red
-        cellsContainingNo = [(3,4), (3,5), (5,2), (5,4), (5,5), (6,5), (7,5), (8,5), (9,5)]
-        highlightedCells = VGroup()
-        for cell in cellsContainingNo:
-            highlightedCells.add(closureTable.get_highlighted_cell(cell, color=RED, fill_opacity=0.5))
-            
-        #Store everything in a VGroup so we can move it all together
-        highlightedClosureTable = VGroup(closureTable, highlightedCells)
+        
         
         title = Text("2.11 - Cierre de los Tipos de Lenguajes").scale(0.8)
         
-        slideTable = VGroup(title.copy(), highlightedClosureTable).arrange(DOWN, buff = 1)
         
         
         
@@ -118,8 +110,6 @@ class Video(Scene):
         sumSymbol = Tex(r"$+$", color=WHITE).move_to(op_box.get_center()).scale(1.5)
         moreThanOrEqualToZero = Tex(r"$\mathbb{N}?$", color=WHITE).move_to(classification_box.get_center())
         self.play(Write(sumSymbol), run_time=1.0)
-        self.play(DrawBorderThenFill(classification_box), run_time=1.0)
-        self.play(Write(moreThanOrEqualToZero), run_time=1.0)
         
         number1 = naturalSetElements[1].copy()
         number3 = naturalSetElements[3].copy()
@@ -134,6 +124,10 @@ class Video(Scene):
         number4.move_to(middlePoint)
         
         self.play(FadeIn(number4, shift=DOWN), run_time=1.0)
+        
+        self.play(DrawBorderThenFill(classification_box), run_time=1.0)
+        self.play(Write(moreThanOrEqualToZero), run_time=1.0)
+        
         self.play(FadeOut(number4, shift=DOWN), run_time=1.0)
         number4.move_to(classification_box.get_center() + LEFT*1.2)
         number4.color = GREEN
@@ -217,7 +211,8 @@ class Video(Scene):
         
         self.play(FadeIn(lenguage3, shift=DOWN), run_time=1.0)
         
-        self.play(FadeOut(VGroup(classification_box, questionSymbol), run_time=1.0))
+        self.play(VGroup(classification_box, questionSymbol).animate.set_opacity(0.2), run_time=1.0)
+        #self.play(FadeOut(VGroup(classification_box, questionSymbol), run_time=1.0))
         self.play(lenguage3.animate.next_to(vennLenguages, RIGHT), run_time=1.0)
         lenguage3b = Tex(r"$?$", color=WHITE).next_to(lenguage3, RIGHT)
         self.play(Write(lenguage3b), run_time=1.0)
@@ -226,34 +221,48 @@ class Video(Scene):
         self.play(Indicate(VGroup(lenguage3, lenguage3b)), run_time=2.0, color=YELLOW)
         self.wait(2)
         
+        mobjects = self.mobjects
+        copyOfIntBox = VGroup(classification_box, questionSymbol).copy()
+        self.add(copyOfIntBox)
         
+        self.play(AnimationGroup(*[
+            obj.animate(lag_ratio=0, run_time=1.5).set_opacity(0)
+            for obj in mobjects
+        ]))
         
+        self.play(copyOfIntBox.animate(lag_ratio=0, run_time=1.5).move_to(ORIGIN))
+        self.play(copyOfIntBox[1].animate(lag_ratio=0, run_time=1.5).set_opacity(0))
+        self.play(copyOfIntBox.animate(lag_ratio=0, run_time=1.5).scale(15))
+        self.play(copyOfIntBox.animate(lag_ratio=0, run_time=0.5).set_opacity(0))
         
-        
-        
-        
-        #? REMNANTS
-        
-        """
         self.play(closureTable.create(line_animation=Write,
                             label_animation=Write,
                             element_animation=Create),
                             run_time=3)
         self.wait(2)
+        
+        
+        
+        self.play(Indicate(closureTable.get_entries((6,4)), color=YELLOW), run_time=1.0)
+        self.play(Indicate(closureTable.get_entries((3,4)), color=YELLOW), run_time=1.0)
+        
+        self.play(closureTable.animate.shift(UP), run_time=1.0)
+        #Cells containing "No" are highlighted in red
+        cellsContainingNo = [(3,4), (3,5), (5,2), (5,4), (5,5), (6,5), (7,5), (8,5), (9,5)]
+        highlightedCells = VGroup()
+        for cell in cellsContainingNo:
+            highlightedCells.add(closureTable.get_highlighted_cell(cell, color=RED, fill_opacity=0.5))
+            
+        #Store everything in a VGroup so we can move it all together
+        highlightedClosureTable = VGroup(closureTable, highlightedCells)
+        
+        self.wait(10)
         self.play(Write(highlightedCells), run_time=4.5)
         self.wait(2)
-        self.play(Unwrite(title), run_time=1.0)
         self.play(FadeOut(highlightedClosureTable, shift=DOWN), run_time=1.0)
         self.wait(2)
         
-        # move diagram to a corner and scale it down so it can serve as a preview
-        self.play(vennLenguages.animate.move_to(3*LEFT), run_time=1.0)
-        
-        self.play(Create(holes), run_time=1.0)
-    
-        self.wait(5)
-        """
-        self.wait(10)
+       
         
 #with tempconfig({"quality": "high_quality", "preview": True, "save_last_frame": True}):   
 #with tempconfig({"quality": "low_quality", "preview": True}):
