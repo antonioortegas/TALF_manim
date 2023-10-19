@@ -116,7 +116,7 @@ class Video(Scene):
         
         self.play(DrawBorderThenFill(op_box), run_time=1.0)
         sumSymbol = Tex(r"$+$", color=WHITE).move_to(op_box.get_center()).scale(1.5)
-        moreThanOrEqualToZero = Tex(r"$\geq 0$", color=WHITE).move_to(classification_box.get_center())
+        moreThanOrEqualToZero = Tex(r"$\mathbb{N}?$", color=WHITE).move_to(classification_box.get_center())
         self.play(Write(sumSymbol), run_time=1.0)
         self.play(DrawBorderThenFill(classification_box), run_time=1.0)
         self.play(Write(moreThanOrEqualToZero), run_time=1.0)
