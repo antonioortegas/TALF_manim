@@ -16,3 +16,5 @@ Guía de instalación de Manim Community Edition: [Manim Instalation](https://do
 - [VSCode](https://code.visualstudio.com/) como IDE
 
 ## Video1 : Apartado: 2.11-Cierre de los Tipos de Lenguajes
+
+## Video2 : Apartado: 4.3-Autómata Finito Determinista Mínimo (AFDM)
