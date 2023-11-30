@@ -16,8 +16,9 @@ class Video(Scene):
         
         video_title = Text("8.5 - Algunas Consideraciones sobre las MT").scale(0.8)
         self.play(Write(video_title), run_time=1)
-        self.wait(3)
+        self.wait(4)
         self.play(FadeOut(video_title, shift=UP), run_time=2)
+        self.wait(3)
         
         
         # Graphic representation of a Turing Machine
@@ -45,6 +46,7 @@ class Video(Scene):
         arrow = Arrow(start=ORIGIN, end=UP, color=WHITE).scale(4.0)
         arrow.next_to(head, DOWN)
         self.play(Write(arrow), run_time=1)
+        self.wait(2)
         
         # Machine (a rectangle containing the word "MT")
         machine = Rectangle(height=2, width=5, color=WHITE, fill_opacity=0.0, fill_color=WHITE).shift(DOWN*2)
@@ -52,7 +54,7 @@ class Video(Scene):
         machine_text = Text("MT").scale(1.5)
         machine_text.move_to(machine.get_center())
         self.play(FadeIn(machine, shift=UP), Write(machine_text), run_time=1)
-        
+        self.wait(7)
         
         # Number each cell of the tape with a number. The head is in cell 0, the next cell is 1, etc.
         cell_numbers = VGroup()
@@ -60,7 +62,8 @@ class Video(Scene):
             cell_number = Text(str(i-(number_of_cells//2 - 2))).scale(0.5)
             cell_number.next_to(tape[i], UP)
             cell_numbers.add(cell_number)
-        self.play(Write(cell_numbers), run_time=1)
+        self.play(Write(cell_numbers), run_time=3)
+        self.wait(3)
         
         # Move head, arrow and machine to the left twice
         # Put head, arrow, machine and machine_text in the same group
@@ -76,6 +79,8 @@ class Video(Scene):
         # Move the numbers twice, so that number 0 is in the middle of the tape
         self.play(cell_numbers.animate.shift(RIGHT), run_time=1)
         self.play(cell_numbers.animate.shift(RIGHT), run_time=1)
+        self.wait(13)
+        
         
         # Put a symbol in each cell of the tape
         symbols = VGroup()
@@ -114,14 +119,16 @@ class Video(Scene):
         arrow2 = Arrow(start=text3.get_right(), end=text4.get_left(), color=WHITE)
         # VGroup containing all the elements of the translation table
         translation_table = VGroup(text1, text2, text3, text4, arrow1, arrow2)
+        self.wait(10)
         self.play(Write(translation_table), run_time=1)
+        self.wait(7)
         
         self.play(FadeOut(text2), FadeOut(text4), run_time=1)
         text2 = Text("&").scale(0.8).next_to(text1, RIGHT).shift(RIGHT*0.5)
         text4 = Text("=").scale(0.8).next_to(text3, RIGHT).shift(RIGHT*0.5)
         self.play(Write(text2), Write(text4), run_time=1)
         translation_table = VGroup(text1, text2, text3, text4, arrow1, arrow2)
-        
+        self.wait(15)
         
         # Fade everything out
         self.play(FadeOut(tape),FadeOut(head), FadeOut(arrow), FadeOut(machine), FadeOut(machine_text), FadeOut(cell_numbers), FadeOut(translation_table), FadeOut(symbols), run_time=1)
@@ -130,14 +137,15 @@ class Video(Scene):
         periodic = Text(". . . * * * | * | | * | | | * | | | | * | | | | | * | | | | | | * . . .").scale(0.7)
         self.play(Write(periodic), run_time=1)
         
-        self.wait(5)
+        self.wait(27)
         
         self.play(FadeOut(periodic), run_time=1)
+        self.wait(15)
         
         mt_diagram = ImageMobject("Bloque3/complex-TM.png").scale(1)
         self.play(FadeIn(mt_diagram, shift=DOWN), run_time=1)
         
-        self.wait(10)
+        self.wait(15)
         
         self.play(FadeOut(mt_diagram), run_time=1)
         
@@ -156,14 +164,15 @@ class Video(Scene):
         question_mark1 = Text("?")
         question_mark2 = Text("?").shift(RIGHT*5)
         
+        self.wait(2)
         self.play(Write(question_mark1), Write(question_mark2), run_time=1)
         
-        self.wait(5)
+        self.wait(2)
         
         # Fade everything out
         self.play(FadeOut(complete_MT), FadeOut(line1), FadeOut(line2), FadeOut(question_mark1), FadeOut(question_mark2), run_time=1)
         
-        self.wait(3)
+        self.wait(1)
         
         
         
@@ -171,7 +180,7 @@ class Video(Scene):
         
         
 #with tempconfig({"quality": "low_quality", "preview": True}):
-with tempconfig({"quality": "high_quality", "preview": True}):   
-#with tempconfig({"quality": "fourk_quality", "preview": True}):
+#with tempconfig({"quality": "high_quality", "preview": True}):   
+with tempconfig({"quality": "fourk_quality", "preview": True}):
     scene = Video()
     scene.render()
