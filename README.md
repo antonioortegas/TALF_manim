@@ -18,3 +18,5 @@ Guía de instalación de Manim Community Edition: [Manim Instalation](https://do
 ## Video1 : Apartado: 2.11-Cierre de los Tipos de Lenguajes
 
 ## Video2 : Apartado: 4.3-Autómata Finito Determinista Mínimo (AFDM)
+
+## Video3 : Apartado: 8.5-Algunas consideraciones sobre Máquinas de Turing
