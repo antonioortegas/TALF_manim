@@ -20,3 +20,5 @@ Guía de instalación de Manim Community Edition: [Manim Instalation](https://do
 ## Video2 : Apartado: 4.3-Autómata Finito Determinista Mínimo (AFDM)
 
 ## Video3 : Apartado: 8.5-Algunas consideraciones sobre Máquinas de Turing
+
+## Video4 : Apartado: 11.2-Recursiva implica WHILE-Computable
